@@ -1,0 +1,246 @@
+{% extends 'insurance/adminbase.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: auto;
+            bottom: calc(100% + 0.125rem);
+            display: none;
+            float: right;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            font-size: 1rem;
+            color: #212529;
+            text-align: right;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+            max-height: 20rem;
+            z-index: 1001;
+            border-radius: 8px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu.show:last-of-type {
+            bottom: auto;
+            top: calc(100% + 0.125rem);
+        }
+
+        .table-responsive {
+            overflow: visible !important;
+        }
+
+        .main-header {
+            background: rgba(91, 134, 229, 1);
+        }
+
+        .img-section {
+            padding: 8px;
+        }
+
+        .table th {
+            padding-left: 2rem;
+        }
+
+        .table td {
+            padding-left: 2rem;
+        }
+
+        /*.table-striped>tbody>tr:nth-child(even)>td {*/
+        /*   background-color: rgba(54, 209, 220, 0.95);
+        /* }*/
+        .heading-text {
+            font-size: 38px;
+        }
+
+        .heading-button {
+            border-radius: 6px;
+            font-size: 16px;
+            border: 1px solid #6c757d;
+            background-color: #6c757d;
+            color: white;
+            padding: 6px 18px;
+        }
+
+        .heading-section {
+            display: flex;
+            margin: 2rem 1.5rem 0.5rem;
+            justify-content: space-between;
+        }
+
+        .add-style {
+            text-decoration: none !important;
+            color: white !important;
+        }
+
+        .main-card {
+            flex-grow: 1;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        .scrollable {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .ban-sec {
+            padding: 8px 4px;
+        }
+    </style>
+
+    <div class="wrapper">
+        <div class="heading-section">
+            <p class="mb-0 text-dark heading-text">Applied Holder</p>
+        </div>
+        <div class="card shadow border-0 mb-7 m-4 main-card">
+            <div class="scrollable">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-nowrap table-striped position-relative">
+                        <thead class="main-header" style="position: sticky; top: 0; z-index: 1000">
+                        <tr>
+                            <th scope="col" class="text-white pl-6">S.N.</th>
+                            <th scope="col" class="text-white pl-6">Policy Name</th>
+                            <th scope="col" class="text-white">Customer Name</th>
+                            <th scope="col" class="text-white">Applied Date</th>
+                            <th scope="col" class="text-white">Status</th>
+                            <th class="text-white">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t in policyrecords %}
+                            <tr>
+                                <td> {{ forloop.counter }}</td>
+                                <td> {{ t.Policy }}</td>
+                                <td> {{ t.customer }}</td>
+                                <td>{{ t.creation_date }}</td>
+                                <td>{{ t.status }}</td>
+                                {% if t.status == 'Pending' %}
+                                    <td>
+                                        <div class="dropdown" style="
+    cursor: pointer;
+">
+                                            <img src="{% static "image/finalaction.png" %}" alt="Actions"
+                                                 class="img-section
+                        actions-icon
+                        dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{% url 'approve-request' t.id %}">
+                                                    <img src="{% static "image/secondedit.png" %}"
+                                                         height="30px" alt="Actions"
+                                                         class="img-section actions-icon
+                                dropdown-toggle"> Approve
+                                                </a>
+                                                <button type="button" class="dropdown-item delete-button"
+                                                        data-toggle="modal"
+                                                        data-target="#deleteModal" data-id="{{ t.id }}">
+                                                    <img src="{% static "image/seconddelete.png" %}"
+                                                         alt="Actions"
+                                                         class="img-section actions-icon
+                                dropdown-toggle"> Reject
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                    <i class="fa-solid fa-ban ban-sec" style="color: #ff0000;"></i>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extrascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = document.querySelectorAll(".delete-button");
+
+            deleteButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    const memberId = button.getAttribute("data-id");
+                    const confirmDeleteButton = document.getElementById("confirmDelete");
+
+                    confirmDeleteButton.addEventListener("click", function () {
+                        window.location.href = "{% url 'reject-request' 0 %}".replace('0', memberId);
+                    });
+                });
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const actionsIcons = document.querySelectorAll(".actions-icon");
+
+            actionsIcons.forEach(function (icon) {
+                icon.addEventListener("click", function () {
+                    const dropdownMenu = icon.nextElementSibling;
+                    closeAllDropdowns();
+                    dropdownMenu.classList.toggle("show");
+                });
+            });
+
+
+            window.addEventListener("click", function (event) {
+                if (!event.target.classList.contains("actions-icon") && !event.target.classList.contains("dropdown-item")) {
+                    closeAllDropdowns();
+                }
+            });
+
+            function closeAllDropdowns() {
+                document.querySelectorAll(".dropdown-menu").forEach(function (menu) {
+                    menu.classList.remove("show");
+                });
+            }
+        });
+
+    </script>
+{% endblock %}
+
+
+
+

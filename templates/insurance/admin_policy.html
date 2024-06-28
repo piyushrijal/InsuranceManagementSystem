@@ -1,0 +1,253 @@
+{% extends 'insurance/adminbase.html' %}
+{% load static %}
+{% block content %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: auto;
+            bottom: calc(100% + 0.125rem);
+            display: none;
+            float: right;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            font-size: 1rem;
+            color: #212529;
+            text-align: right;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+            max-height: 20rem;
+            z-index: 1001;
+            border-radius: 8px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu.show:last-of-type {
+            bottom: auto;
+            top: calc(100% + 0.125rem);
+        }
+
+        .table-responsive {
+            overflow: visible !important;
+        }
+
+        .main-header {
+            background: rgba(91, 134, 229, 1);
+        }
+
+        .img-section {
+            padding: 8px;
+        }
+
+        .table th {
+            padding-left: 2rem;
+        }
+
+        .table td {
+            padding-left: 2rem;
+        }
+
+        /*.table-striped>tbody>tr:nth-child(even)>td {*/
+        /*   background-color: rgba(54, 209, 220, 0.95);
+        /* }*/
+        .heading-text {
+            font-size: 38px;
+        }
+
+        .heading-button {
+            border-radius: 10px;
+            font-size: 20px;
+            border: 1px solid rgba(91, 134, 229, 0.95);
+            background-color: rgba(91, 134, 229, 0.95);
+            color: white;
+            padding: 6px 16px;
+            cursor: pointer;
+        }
+
+        .heading-button:hover {
+            background-color: #5BBCFF;
+            border: 1px solid #5BBCFF;
+            transition: 0.3s ease;
+        }
+
+        .heading-section {
+            display: flex;
+            margin: 2rem 1.5rem 0.5rem;
+            justify-content: space-between;
+        }
+
+        .add-style {
+            text-decoration: none !important;
+            color: white !important;
+        }
+
+        .main-card {
+            flex-grow: 1;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        .scrollable {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            padding: 3rem;
+        }
+
+
+        .btn-default {
+            background: #006EFF;
+            width: 100%;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+        }
+
+        .cards {
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+            border: none;
+            margin-bottom: 30px;
+            border-radius: 1.5rem;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .cards:hover {
+            transform: scale(1.05);
+            transition: all 1s ease;
+            z-index: 999;
+        }
+
+        .cards-01 {
+            margin-left: 2rem;
+            margin-bottom: 4rem;
+            margin-top: 1rem;
+        }
+
+        .cards-01 .cards-body {
+            position: relative;
+            padding: 40px 25px;
+            text-align: center;
+        }
+
+
+    </style>
+
+    <div class="wrapper">
+        <div class="heading-section">
+            <p class="mb-0 text-dark heading-text">Policy Dashboard</p>
+        </div>
+        <div class="card shadow border-0 mb-7 m-4 main-card">
+            <div class="scrollable">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-view-policy" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">View Policy</h4>
+                                    <h2 class="text-center"><i class="fas fa-eye f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-add-policy" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Add Policy</h4>
+                                    <h2 class="text-center"><i class="fas fa-plus f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-update-policy" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Update Policy</h4>
+                                    <h2 class="text-center"><i class="fas fa-edit f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-delete-policy" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Delete Policy</h4>
+                                    <h2 class="text-center"><i class="fas fa-trash f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-view-policy-holder" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Applied Holder</h4>
+                                    <h2 class="text-center"><i class="fas fa-user-cog f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-view-approved-policy-holder" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Approved Holder</h4>
+                                    <h2 class="text-center"><i class="fas fa-user-check f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-view-disapproved-policy-holder"
+                                   style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Disapproved Holder</h4>
+                                    <h2 class="text-center"><i class="fas fa-user-times f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cards cards-01">
+                            <div class="cards-body">
+                                <a href="admin-view-waiting-policy-holder" style="text-decoration: none;color:white;">
+                                    <h4 class="cards-title">Waiting Approval</h4>
+                                    <h2 class="text-center"><i class="fas fa-user-clock f-left"></i></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+

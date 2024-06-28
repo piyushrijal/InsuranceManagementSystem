@@ -1,0 +1,153 @@
+{% extends 'insurance/adminbase.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: auto;
+            bottom: calc(100% + 0.125rem);
+            display: none;
+            float: right;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            font-size: 1rem;
+            color: #212529;
+            text-align: right;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+            max-height: 20rem;
+            z-index: 1001;
+            border-radius: 8px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu.show:last-of-type {
+            bottom: auto;
+            top: calc(100% + 0.125rem);
+        }
+
+        .table-responsive {
+            overflow: visible !important;
+        }
+
+        .main-header {
+            background: rgba(91, 134, 229, 1);
+        }
+
+        .img-section {
+            padding: 8px;
+        }
+
+        .table th {
+            padding-left: 2rem;
+        }
+
+        .table td {
+            padding-left: 2rem;
+        }
+
+        /*.table-striped>tbody>tr:nth-child(even)>td {*/
+        /*   background-color: rgba(54, 209, 220, 0.95);
+        /* }*/
+        .heading-text {
+            font-size: 38px;
+        }
+
+        .heading-button {
+            border-radius: 10px;
+            font-size: 20px;
+            border: 1px solid rgba(91, 134, 229, 0.95);
+            background-color: rgba(91, 134, 229, 0.95);
+            color: white;
+            padding: 6px 16px;
+            cursor: pointer;
+        }
+
+        .heading-button:hover {
+            background-color: #5BBCFF;
+            border: 1px solid #5BBCFF;
+            transition: 0.3s ease;
+        }
+
+        .heading-section {
+            display: flex;
+            margin: 2rem 1.5rem 0.5rem;
+            justify-content: space-between;
+        }
+
+        .add-style {
+            text-decoration: none !important;
+            color: white !important;
+        }
+
+        .main-card {
+            flex-grow: 1;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        .scrollable {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+
+    <div class="wrapper">
+        <div class="heading-section">
+            <p class="mb-0 text-dark heading-text">Disapproved Holder</p>
+        </div>
+        <div class="card shadow border-0 mb-7 m-4 main-card">
+            <div class="scrollable">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-nowrap table-striped position-relative">
+                        <thead class="main-header" style="position: sticky; top: 0; z-index: 1000">
+                        <tr>
+                            <th scope="col" class="text-white pl-6">S.N.</th>
+                            <th scope="col" class="text-white pl-6">Policy Name</th>
+                            <th scope="col" class="text-white">Customer Name</th>
+                            <th scope="col" class="text-white">Applied Date</th>
+                            <th scope="col" class="text-white">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t in policyrecords %}
+                            <tr>
+                                <td> {{ forloop.counter }}</td>
+                                <td> {{ t.Policy }}</td>
+                                <td> {{ t.customer }}</td>
+                                <td>{{ t.creation_date }}</td>
+                                <td>{{ t.status }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,93 @@
+{% extends 'insurance/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <style>
+
+        .form-wrapper {
+            border-radius: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .title-text {
+            margin-bottom: 2rem;
+        }
+
+        .text-field {
+            border-radius: 0.45rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid white;
+            border-bottom: 2px solid #adb5bd;
+        }
+
+        input::placeholder {
+            padding: 5px;
+        }
+
+        input:focus,
+        select:focus,
+        button:focus {
+            outline: none;
+        }
+
+        select {
+            padding-left: 5px;
+        }
+
+        .heading-button {
+            border-radius: 10px;
+            font-size: 20px;
+            border: 1px solid rgba(91, 134, 229, 0.95);
+            background-color: rgba(91, 134, 229, 0.95);
+            color: white;
+            padding: 6px 24px;
+            cursor: pointer;
+        }
+
+        .heading-button:hover {
+            background-color: #5BBCFF;
+            border: 1px solid #5BBCFF;
+            transition: 0.3s ease;
+        }
+
+        .section-one h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 3rem
+        }
+
+        @media screen and (min-width: 1200px) and (max-width: 1600px) {
+
+            .col-xl-4 {
+                flex: 0 0 29.33333%;
+                max-width: 29.33333%;
+            }
+        }
+
+        @media screen and (min-width: 1601px) and (max-width: 1800px) {
+
+            .col-xl-4 {
+                flex: 0 0 26.33333%;
+                max-width: 26.33333%;
+            }
+        }
+    </style>
+
+    <div class="mt-4 d-flex justify-content-center align-items-center">
+        <div class="col-xl-4 mid-screen small-screen col-lg-6 col-md-6 col-sm-9 p-5 shadow bg-white form-wrapper text-center">
+            <div class="col-12">
+                <h2 class="text-center title-text">Add Category</h2>
+            </div>
+            <form method="POST" class="text-center">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="d-flex">
+                    <button type="submit" name="submit" class=" w-50 mx-auto  mt-1 heading-button">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
