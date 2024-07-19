@@ -374,14 +374,14 @@
     }
 
     .lead-white {
-        font-size: 40px;
+        font-size: 32px;
         text-align: left;
         font-weight: 200;
-        letter-spacing: 2;
         color: white;
     }
 
     .desc-white {
+        padding-left: 29rem;
         margin-top: 30px;
         font-size: 20px;
         text-align: left;
@@ -451,6 +451,27 @@
         margin: 15px 0 0;
     }
 
+    .title-text {
+        margin-top: 2.4rem !important;
+        font-size: 3rem !important;
+        font-weight: 600;
+    }
+
+    .body-text {
+        font-size: 1.7rem !important;
+        margin-top: 1.5rem !important;
+    }
+    .for-null{
+        margin-top: 2rem;
+    }
+    .points-title{
+        font-weight: 700;
+        font-size: 20px;
+    }
+    .inside-ul{
+        margin-top: 2rem;
+        font-size: 18px;
+    }
 </style>
 {% include "insurance/navbar.html" %}
 <body>
@@ -462,8 +483,8 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
                 <div class="intro-message">
-                    <h1 class="animated slideInLeft">Welcome to Our Insurance Management System</h1>
-                    <h3 class="animated slideInRight">Streamline your insurance operations with our intuitive platform.
+                    <h1 class="animated slideInLeft title-text">Welcome to Our Insurance Management System</h1>
+                    <h3 class="animated slideInRight body-text">Streamline your insurance operations with our intuitive platform.
                         From policy management to customer service, we've got you covered with efficiency and ease.</h3>
 
 
@@ -472,6 +493,8 @@
             <div class="col-lg-2">
 
             </div>
+        <div class="for-null">dcas asd sad asc ascascsdc</div>
+
         </div>
 
     </div>
@@ -490,17 +513,11 @@
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <h4>Streamline your insurance operations with our intuitive platform.
+                <h4 class="points-title">Streamline your insurance operations with our intuitive platform.
 
                 </h4>
-                <p>
-                    Our platform offers robust features tailored to meet the needs of insurance professionals. Whether
-                    you're
-                    managing policies, processing claims, or enhancing customer interactions, [Your Company Name]
-                    provides
-                    seamless solutions.
-                </p>
-                <ul>
+
+                <ul class="inside-ul">
                     <li><strong>Policy Management:</strong> Efficiently manage and update policies with ease.</li>
                     <li><strong>Customer Service:</strong> Provide exceptional support with our integrated tools.</li>
                     <li><strong>Application Processing:</strong> Streamline applications and approvals for faster
@@ -511,16 +528,7 @@
                         requirements.
                     </li>
                 </ul>
-                <p>
-                    Whether you're a small agency or a large enterprise, [Your Company Name] is dedicated to optimizing
-                    your
-                    insurance operations. Join us in transforming the way you manage insurance today.
-                </p>
-                <p>
-                    <strong>Get Started:</strong> Ready to experience simplified insurance management? Sign up for a
-                    demo or
-                    contact our team to learn more about how we can support your business.
-                </p>
+
             </div>
             <div class="col-lg-2"></div>
         </div>
@@ -585,10 +593,7 @@
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <p class="lead-white">"Insurance is the best help in the worst of times."
-
-
-                </p>
+                <p class="lead-white">"Insurance is the best help in the worst of times."</p>
 
             </div>
 
@@ -605,6 +610,7 @@
             <div class="col-lg-2"></div>
 
         </div>
+
     </div>
     <!-- /.container -->
 

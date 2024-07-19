@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, reverse
 from . import forms, models
 from django.db.models import Sum
@@ -11,6 +12,12 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from customer import models as CMODEL
 from customer import forms as CFORM
+
+from .forms import CustomAuthenticationForm
+
+
+class MyLoginView(LoginView):
+    form_class = CustomAuthenticationForm
 
 
 def home_view(request):

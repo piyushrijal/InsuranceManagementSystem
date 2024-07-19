@@ -1,6 +1,13 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from . import models
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages['invalid_login'] = 'Your username or password is incorrect. Please try again.'
 
 
 class ContactusForm(forms.Form):

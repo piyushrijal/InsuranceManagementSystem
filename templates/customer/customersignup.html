@@ -72,7 +72,53 @@
                 max-width: 26.33333%;
             }
         }
+
+        .error-message {
+            padding-left: 1rem;
+            text-align: left;
+            color: #E72929;
+            font-size: 14px;
+            margin-bottom: 1em;
+        }
     </style>
+    <script>
+        function validateForm(event) {
+            let valid = true;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+            // Validate phone number
+            const phone = document.querySelector('input[name="mobile"]').value;
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('phone-error').textContent = 'Phone number must be exactly 10 digits.';
+                valid = false;
+            }
+
+            // Validate first name and last name
+            const firstName = document.querySelector('input[name="first_name"]').value;
+            const lastName = document.querySelector('input[name="last_name"]').value;
+            if (/\d/.test(firstName)) {
+                document.getElementById('first-name-error').textContent = 'First name should not contain numbers.';
+                valid = false;
+            }
+            if (/\d/.test(lastName)) {
+                document.getElementById('last-name-error').textContent = 'Last name should not contain numbers.';
+                valid = false;
+            }
+
+            // Validate password
+            const password = document.querySelector('input[name="password"]').value;
+            if (password.length < 8) {
+                document.getElementById('password-error').textContent = 'Password must be at least 8 characters long.';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 <body>
 {% include "insurance/navbar.html" %}
@@ -82,42 +128,50 @@
         <div class="col-12">
             <h2 class="text-center title-text">Signup Form</h2>
         </div>
-        <form method="POST" autocomplete="off" enctype="multipart/form-data">
+        <form method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit="validateForm(event)">
             {% csrf_token %}
+            {% if userForm.errors %}
+                <div class="error-message">
+                    {% for field, errors in userForm.errors.items %}
+                        {% for error in errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="form-group col-md-12">
-                {% render_field userForm.username|attr:'required:true' class="form-control text-field" placeholder="username" %}
+                {% render_field userForm.username|attr:'required:true' class="form-control text-field" placeholder="Username" %}
             </div>
             <div class="form-group col-md-12">
-                {% render_field userForm.password|attr:'required:true' class="form-control text-field" placeholder="password" %}
+                {% render_field userForm.password|attr:'required:true|minlength:8' class="form-control text-field" placeholder="Password" %}
+                <div id="password-error" class="error-message"></div>
             </div>
-
             <div class="form-group col-md-12">
                 {% render_field userForm.first_name|attr:'required:true' class="form-control text-field" placeholder="First Name" %}
+                <div id="first-name-error" class="error-message"></div>
             </div>
             <div class="form-group col-md-12">
                 {% render_field userForm.last_name|attr:'required:true' class="form-control text-field" placeholder="Last Name" %}
+                <div id="last-name-error" class="error-message"></div>
             </div>
-
             <div class="form-group col-md-12">
-                {% render_field customerForm.mobile|attr:'required:true' class="form-control text-field" placeholder="Mobile" %}
+                {% render_field customerForm.mobile|attr:'required:true' class="form-control text-field" placeholder="Mobile" pattern="\d{10}" %}
+                <div id="phone-error" class="error-message"></div>
             </div>
             <div class="form-group col-md-12">
                 {% render_field customerForm.address|attr:'required:true' class="form-control text-field" placeholder="Address" %}
             </div>
-
             <div class="form-group col-md-12">
                 {% render_field customerForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
             </div>
-
             <div class="d-flex">
-                <button type="submit" name="submit" class=" w-50 mx-auto  mt-1 heading-button">
+                <button type="submit" name="submit" class="w-50 mx-auto mt-1 heading-button">
                     Sign Up
                 </button>
             </div>
         </form>
 
     </div>
-</div>
 </div>
 <br><br>
 </body>

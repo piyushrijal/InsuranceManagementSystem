@@ -107,6 +107,14 @@
             height: 100%;
             overflow: auto;
         }
+
+        .status-green {
+            background-color: green;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
     </style>
 
     <div class="wrapper">
@@ -134,7 +142,11 @@
                                 <td> {{ t.Policy }}</td>
                                 <td> {{ t.customer }}</td>
                                 <td>{{ t.creation_date }}</td>
-                                <td>{{ t.status }}</td>
+                                <td>
+                                    <span class="{% if t.status == 'Approved' %}status-green{% endif %}">
+                                        {{ t.status }}
+                                    </span>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

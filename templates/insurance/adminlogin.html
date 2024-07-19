@@ -168,6 +168,12 @@
         .login-btn {
             border-radius: 2rem !important;
         }
+
+        .error-message {
+            color: #E72929; /* Red color for error messages */
+            font-size: 14px;
+            margin-bottom: 1em;
+        }
     </style>
 
 </head>
@@ -187,7 +193,13 @@
             </header>
 
             <div class="inputs">
-
+                {% if form.non_field_errors %}
+                    <div class="invalid">
+                        {% for error in form.non_field_errors %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 {% render_field form.username class="form-control" placeholder="Username" %}
                 <br>
                 {% render_field form.password class="form-control" placeholder="Password" %}

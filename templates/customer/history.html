@@ -107,6 +107,14 @@
             height: 100%;
             overflow: auto;
         }
+
+        .status-orange {
+            background-color: #f29339;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
     </style>
 
     <div class="wrapper">
@@ -140,7 +148,11 @@
                                 <td> {{ forloop.counter }}</td>
                                 <td> {{ t.Policy }}</td>
                                 <td>{{ t.creation_date }}</td>
-                                <td>{{ t.status }}</td>
+                                <td>
+                                    <span class="{% if t.status == 'Pending' %}status-orange{% endif %}">
+                                        {{ t.status }}
+                                    </span>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

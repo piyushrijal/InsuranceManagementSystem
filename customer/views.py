@@ -23,19 +23,29 @@ def customer_signup_view(request):
     userForm = forms.CustomerUserForm()
     customerForm = forms.CustomerForm()
     mydict = {'userForm': userForm, 'customerForm': customerForm}
+
     if request.method == 'POST':
         userForm = forms.CustomerUserForm(request.POST)
         customerForm = forms.CustomerForm(request.POST, request.FILES)
+
         if userForm.is_valid() and customerForm.is_valid():
-            user = userForm.save()
+            user = userForm.save(commit=False)
             user.set_password(user.password)
             user.save()
+
             customer = customerForm.save(commit=False)
             customer.user = user
             customer.save()
-            my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
-            my_customer_group[0].user_set.add(user)
-        return HttpResponseRedirect('customerlogin')
+
+            my_customer_group, created = Group.objects.get_or_create(name='CUSTOMER')
+            my_customer_group.user_set.add(user)
+
+            return HttpResponseRedirect('/login')
+        else:
+            # Include the form errors in the context
+            mydict['userForm'] = userForm
+            mydict['customerForm'] = customerForm
+
     return render(request, 'customer/customersignup.html', context=mydict)
 
 
@@ -43,7 +53,7 @@ def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
 
-@login_required(login_url='adminlogin')
+@login_required(login_url='customerlogin')
 def customer_dashboard_view(request):
     dict = {
         'customer': models.Customer.objects.get(user_id=request.user.id),
@@ -57,7 +67,7 @@ def customer_dashboard_view(request):
     return render(request, 'customer/customer_dashboard.html', context=dict)
 
 
-@login_required(login_url='adminlogin')
+@login_required
 def apply_policy_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.Policy.objects.all()
@@ -69,7 +79,7 @@ def apply_policy_view(request):
     })
 
 
-@login_required(login_url='adminlogin')
+@login_required
 def apply_view(request, pk):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policy = CMODEL.Policy.objects.get(id=pk)
@@ -79,14 +89,12 @@ def apply_view(request, pk):
     return redirect('history')
 
 
-@login_required(login_url='adminlogin')
 def history_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.PolicyRecord.objects.all().filter(customer=customer)
     return render(request, 'customer/history.html', {'policies': policies, 'customer': customer})
 
 
-@login_required(login_url='adminlogin')
 def ask_question_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     form = CFORM.QuestionForm()
@@ -101,7 +109,6 @@ def ask_question_view(request):
     return render(request, 'customer/ask_question.html', {'form': form, 'customer': customer})
 
 
-@login_required(login_url='adminlogin')
 def question_history_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     questions = CMODEL.Question.objects.all().filter(customer=customer)
