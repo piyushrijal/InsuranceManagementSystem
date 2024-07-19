@@ -516,32 +516,29 @@
                 src="{% static "image/toggle.png" %}"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <img height="50" src="{% static 'image/img.png' %}" alt="alt" srcset="">
-        <span class="navbar-title">LIC</span>
+        <img height="50" src="{% static 'image/insurance logo-01.png' %}" alt="alt" srcset="">
+        <a class="nav-link text-white" href="{% url '' %}">
+            <span class="navbar-title">LIFIZY</span></a>
 
-        <ul class="navbar-nav sidenav-toggler" style="background-color: white; padding-bottom: 5rem">
-            <li class="nav-item">
-            </li>
-        </ul>
+
         <ul class="navbar-nav ml-auto ">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/customer/customerclick" >
-                    <span class="logout-style">Customer</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto ">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/adminlogin">
-                    <span class="logout-style">Admin</span></a>
-            </li>
-        </ul>
-                <ul class="navbar-nav ml-auto ">
             <li class="nav-item">
                 <a class="nav-link text-white" href="/aboutus">
                     <span class="logout-style">About Us</span></a>
             </li>
         </ul>
-
+        <ul class="navbar-nav ml-auto ">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/customer/customersignup">
+                    <span class="logout-style">Signup</span></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto ">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/login">
+                    <span class="logout-style">Login</span></a>
+            </li>
+        </ul>
     </div>
 </nav>
 

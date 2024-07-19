@@ -9,12 +9,13 @@ urlpatterns = [
 
     path('customer/', include('customer.urls')),
     path('', views.home_view, name=''),
-    path('logout', LogoutView.as_view(template_name='insurance/logout.html'), name='logout'),
+    path('logout', LogoutView.as_view(next_page='adminlogin'), name='logout'),
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
     path('afterlogin', views.afterlogin_view, name='afterlogin'),
 
-    path('adminlogin', LoginView.as_view(template_name='insurance/adminlogin.html'), name='adminlogin'),
+    # path('adminlogin', LoginView.as_view(template_name='insurance/adminlogin.html'), name='adminlogin'),
+    path('login', LoginView.as_view(template_name='insurance/adminlogin.html'), name='adminlogin'),
     path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
 
     path('admin-view-customer', views.admin_view_customer_view, name='admin-view-customer'),

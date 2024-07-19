@@ -43,7 +43,7 @@ def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
 
-@login_required(login_url='customerlogin')
+@login_required(login_url='adminlogin')
 def customer_dashboard_view(request):
     dict = {
         'customer': models.Customer.objects.get(user_id=request.user.id),
@@ -57,7 +57,7 @@ def customer_dashboard_view(request):
     return render(request, 'customer/customer_dashboard.html', context=dict)
 
 
-@login_required
+@login_required(login_url='adminlogin')
 def apply_policy_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.Policy.objects.all()
@@ -69,7 +69,7 @@ def apply_policy_view(request):
     })
 
 
-@login_required
+@login_required(login_url='adminlogin')
 def apply_view(request, pk):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policy = CMODEL.Policy.objects.get(id=pk)
@@ -79,12 +79,14 @@ def apply_view(request, pk):
     return redirect('history')
 
 
+@login_required(login_url='adminlogin')
 def history_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.PolicyRecord.objects.all().filter(customer=customer)
     return render(request, 'customer/history.html', {'policies': policies, 'customer': customer})
 
 
+@login_required(login_url='adminlogin')
 def ask_question_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     form = CFORM.QuestionForm()
@@ -99,6 +101,7 @@ def ask_question_view(request):
     return render(request, 'customer/ask_question.html', {'form': form, 'customer': customer})
 
 
+@login_required(login_url='adminlogin')
 def question_history_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     questions = CMODEL.Question.objects.all().filter(customer=customer)

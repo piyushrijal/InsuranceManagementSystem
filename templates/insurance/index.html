@@ -1,35 +1,617 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" dir="ltr">
+<html dir="ltr">
 
 <style>
-        .xyz{
-          margin-bottom: 0px;
-          background-image: url('{% static "image/homepage.jpg" %}');
-          background-size: cover;
-          background-repeat: no-repeat;
+
+
+    .brand {
+        margin-top: -25px;
+        height: 95px;
+        width: 120px;
+    }
+
+    .navigation {
+        margin: 0px 0px 0px 0px;
+        background: transparent;
+        border: none;
+    }
+
+    .critter {
+
+        margin-top: 5px;
+    }
+
+    .scrollNavigation {
+        margin-right: 30px;
+        background: #19171D;
+        border: none;
+        color: white;
+        text-align: center;
+        width: 100%;
+    }
+
+    #menuText {
+        font-weight: 150;
+        font-size: 18px;
+        color: #515057;
+        padding: 10px 30px 10px 0px;
+    }
+
+    #menuText:hover {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+
+    }
+
+    #navButton {
+        font-weight: 500;
+        font-size: 20px;
+        border: none;
+        padding: 1;
+        margin: 18px 10px 10px 0px;
+        border-radius: 0%;
+        color: white;
+        background: #F7426E;
+    }
+
+    #navButton:hover {
+        font-weight: 500;
+        font-size: 20px;
+        background: #FB0446;
+        border: none;
+        padding: 1;
+        margin: 18px 10px 10px 0px;
+        border-radius: 0%;
+        color: white;
+    }
+
+    a, ul, li {
+
+        text-decoration: none;
+    }
+
+    #search {
+
+        margin: 25px 30px 10px 0px;
+        color: #515057;
+
+    }
+
+    #search:hover {
+
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+
+    }
+
+    /************/
+
+    p {
+
+        color: white;
+        font-family: "Lato";
+        text-align: left;
+        font-size: 14px;
+        font-weight: 200;
+
+
+    }
+
+    .learn:hover {
+        cursor: pointer;
+    }
+
+    #arrow:hover {
+
+        cursor: pointer;
+
+    }
+
+    .intro-header {
+        padding-top: 10px;
+        padding-bottom: 0px;
+        text-align: center;
+        color: #f8f8f8;
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/827672/critterback-min%20(1).png");
+        background-size: cover;
+
+    }
+
+    .intro-message {
+        position: relative;
+        padding-top: 10%;
+        padding-bottom: 50%;
+    }
+
+    .intro-message > h1 {
+        margin-top: -500;
+        font-size: 4.5em;
+        font-weight: 800;
+        color: #515057;
+
+    }
+
+    .intro-message > h3 {
+        margin-top: 50;
+        font-size: 2.5em;
+        font-weight: 150;
+        letter-spacing: 4;
+        color: #515057;
+
+    }
+
+    .intro-message > h4 {
+        margin-top: 200;
+        font-size: 1.25em;
+        font-weight: 400;
+        letter-spacing: 2;
+
+    }
+
+    @media (max-width: 767px) {
+        .intro-message {
+            padding-bottom: 15%;
         }
+
+        .intro-message > h1 {
+            font-size: 3em;
+        }
+
+        ul.intro-social-buttons > li {
+            display: block;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        ul.intro-social-buttons > li:last-child {
+            margin-bottom: 0;
+        }
+
+    }
+
+    #button {
+        margin-top: 30px;
+        margin-bottom: 40px;
+        background: #F7426E;
+        border: none;
+        border-radius: 0%;
+        border-bottom: 6px solid #FB0446;
+        padding: 15px 15px 15px 15px;
+
+    }
+
+    #button:hover {
+        margin-top: 30px;
+        background: #FB0446;
+        border-bottom: 6px solid #F7426E;
+        border-radius: 0%;
+        padding: 15px 15px 15px 15px;
+
+    }
+
+    #buttonMiddle {
+        margin: auto;
+        margin-top: 50px;
+        display: block;
+        background: #F7426E;
+        border: none;
+        border-radius: 0%;
+        border-bottom: 6px solid #FB0446;
+        padding: 15px 15px 15px 15px;
+        text-decoration: none;
+    }
+
+    #buttonMiddle:hover {
+        margin: auto;
+        display: block;
+        margin-top: 50px;
+        background: #FB0446;
+        border-bottom: 6px solid #F7426E;
+        border-radius: 0%;
+        padding: 15px 15px 15px 15px;
+        text-decoration: none;
+
+    }
+
+    #buttonBottom {
+        margin-top: 50px;
+        background: #F7426E;
+        border: none;
+        border-radius: 0%;
+        border-bottom: 6px solid #FB0446;;
+        padding: 15px 15px 15px 15px;
+        text-decoration: none;
+    }
+
+    #buttonBottom:hover {
+        margin-top: 50px;
+        background: #FB0446;
+        border-bottom: 6px solid #F7426E;
+        border-radius: 0%;
+        padding: 15px 15px 15px 15px;
+        text-decoration: none;
+
+    }
+
+    .network-name {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 800;
+        font-family: 'lato';
+    }
+
+    .network-name-2 {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 800;
+        font-family: 'lato';
+        text-decoration: none;
+    }
+
+    .network-name-2:hover {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 800;
+        font-family: 'lato';
+        text-decoration: none;
+    }
+
+    .content-section-a {
+        padding: 30px 0;
+        background: #F7FAFC;
+    }
+
+    .content-section-b {
+        padding: 30px 0;
+        background-color: #F7FAFC;
+
+    }
+
+    .content-section-c {
+        padding: 20px 0;
+        border-bottom: solid 0.05px black;
+        background-color: #EBF3FE;
+        background: linear-gradient(
+                rgba(250, 63, 108, 0.90),
+                rgba(92, 12, 106, 1.0)
+        ), url("https://static.pexels.com/photos/226589/pexels-photo-226589-medium.jpeg") no-repeat center center;
+        background-size: cover;
+
+    }
+
+    .content-section-d {
+        padding: 0px 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: solid 0.05px black;
+        background-color: #F7FAFC;
+        background: linear-gradient(
+                rgba(250, 63, 108, 0.90),
+                rgba(92, 12, 106, 1.0)
+        ), url("https://static.pexels.com/photos/37539/colored-pencils-colour-pencils-mirroring-color-37539-medium.jpeg") no-repeat center center;
+        background-size: cover;
+
+    }
+
+    .content-section-e {
+        padding: 20px 0;
+        background-color: #FFFFFF;
+
+    }
+
+    .content-section-f {
+        padding: 30px 0;
+        background-color: #F7FAFC;
+
+    }
+
+
+    .desc {
+        margin-top: 50px;
+        color: #333333;
+        text-align: center;
+        font-family: "Lato";
+    }
+
+
+    .desc2 {
+        margin-top: 20px;
+        color: #333333;
+        font-weight: 300;
+        font-size: 24px;
+        text-align: center;
+        font-family: "Lato";
+        letter-spacing: 0;
+    }
+
+    .desc3 {
+        color: #333333;
+        font-weight: 300;
+        font-size: 24px;
+        text-align: left;
+        font-family: "Lato";
+        letter-spacing: 0;
+    }
+
+    .desc4 {
+        color: #333333;
+        text-align: center;
+        font-family: "Lato";
+    }
+
+    .icons {
+        margin-top: 10;
+        color: #DBE2E8;
+
+    }
+
+    .lead {
+        font-size: 45px;
+        padding-top: 70px;
+        text-align: center;
+        font-weight: 800;
+        color: #515057;
+    }
+
+
+    .lead2 {
+        font-size: 35px;
+        padding-bottom: 20;
+        text-align: left;
+        font-weight: 800;
+        color: #515057;
+    }
+
+    .section-heading-spacer {
+
+        float: left;
+        width: 100px;
+        border-top: 3px solid #EF494F;
+
+    }
+
+    .lead-white {
+        font-size: 40px;
+        text-align: left;
+        font-weight: 200;
+        letter-spacing: 2;
+        color: white;
+    }
+
+    .desc-white {
+        margin-top: 30px;
+        font-size: 20px;
+        text-align: left;
+        font-weight: 100;
+        letter-spacing: 3;
+        color: white;
+    }
+
+    .courseImg {
+
+        margin: auto;
+        margin-top: 0px;
+        display: block;
+        heibuttght: 50%;
+        width: 50%;
+    }
+
+    .descImg {
+
+        margin-top: 3%;
+
+    }
+
+    .descImg2 {
+
+        margin-top: 8%;
+
+    }
+
+    .test:hover {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+
+    }
+
+
+    @media (max-width: 1199px) {
+
+    }
+
+    @media (max-width: 767px) {
+
+    }
+
+    .foot-text {
+
+        font-size: 18px;
+        text-align: left;
+        font-weight: 400;
+        letter-spacing: 1;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .foot-text2 {
+
+        font-size: 18px;
+        text-align: left;
+        font-weight: 400;
+        letter-spacing: 1;
+        color: #F7426E;
+        margin-top: 10px;
+    }
+
+    p.copyright {
+        margin: 15px 0 0;
+    }
+
 </style>
+{% include "insurance/navbar.html" %}
 <body>
-  {% include "insurance/navbar.html" %}
-<br>
-<section id="section-jumbotron" style="margin-bottom: 0px;" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz">
-  <div class="container text-center">
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    
-  </div>  
-</section>
+<!-- Header Banner -->
+<div class="intro-header">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="intro-message">
+                    <h1 class="animated slideInLeft">Welcome to Our Insurance Management System</h1>
+                    <h3 class="animated slideInRight">Streamline your insurance operations with our intuitive platform.
+                        From policy management to customer service, we've got you covered with efficiency and ease.</h3>
 
 
-<div class="jumbotron" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+            </div>
+            <div class="col-lg-2">
 
-  <p class="lead text-center"> “Whole life does two things for you: Protects your family and allows you to save for your future.”
-    </p>
-  
-  <p class="text-center">- Dinara</p>
-  
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+
 </div>
-  {% include "insurance/footer.html" %}
+
+<!-- Page Content -->
+<!-- /.content-section-a -->
+
+<div class="content-section-a">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <h4>Streamline your insurance operations with our intuitive platform.
+
+                </h4>
+                <p>
+                    Our platform offers robust features tailored to meet the needs of insurance professionals. Whether
+                    you're
+                    managing policies, processing claims, or enhancing customer interactions, [Your Company Name]
+                    provides
+                    seamless solutions.
+                </p>
+                <ul>
+                    <li><strong>Policy Management:</strong> Efficiently manage and update policies with ease.</li>
+                    <li><strong>Customer Service:</strong> Provide exceptional support with our integrated tools.</li>
+                    <li><strong>Application Processing:</strong> Streamline applications and approvals for faster
+                        service.
+                    </li>
+                    <li><strong>Data Security:</strong> Ensure peace of mind with our advanced security measures.</li>
+                    <li><strong>Customizable Solutions:</strong> Tailor our platform to fit your unique business
+                        requirements.
+                    </li>
+                </ul>
+                <p>
+                    Whether you're a small agency or a large enterprise, [Your Company Name] is dedicated to optimizing
+                    your
+                    insurance operations. Join us in transforming the way you manage insurance today.
+                </p>
+                <p>
+                    <strong>Get Started:</strong> Ready to experience simplified insurance management? Sign up for a
+                    demo or
+                    contact our team to learn more about how we can support your business.
+                </p>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<div class="content-section-b">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="test col-md-2">
+
+                <img class="img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/react-3888783e57833a0be00635fba9d9c276.svg"
+                     id="responsive" alt=""/>
+                <br/>
+
+            </div>
+            <div class="test col-md-2">
+                <img class="img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/js-31616de268520b9f2f107722b3b45195.svg"
+                     id="responsive" alt=""/>
+            </div>
+
+
+            <div class="test col-md-2">
+                <img class="img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/rx-ac0491f35656435edc51ab63e27dea4d.svg"
+                     id="responsive" alt=""/>
+            </div>
+            <div class="test col-md-2">
+                <img class="img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/node-61a17f4d3c88e9e64c56960ef7eda9be.svg"
+                     id="responsive" alt=""/>
+                <br/>
+            </div>
+            <div class="test col-md-2">
+                <img class=" img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/elm-f5841b4ff4aead60d97fff53d1b34397.svg"
+                     id="responsive" alt=""/>
+            </div>
+            <div class="test col-md-2">
+                <img class=" img-responsive"
+                     src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/d3-e8f9baa677bcbdc852acad420a53fb4f.svg"
+                     id="responsive" alt=""/>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<div class="content-section-c">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <p class="lead-white">"Insurance is the best help in the worst of times."
+
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-2"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <p class="desc-white">- Benjamin Franklin</p>
+
+            </div>
+
+            <div class="col-lg-2"></div>
+
+        </div>
+    </div>
+    <!-- /.container -->
+
+</div>
+
+
+{% include "insurance/footer.html" %}
 
 
 </body>

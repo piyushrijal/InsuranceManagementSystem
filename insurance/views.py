@@ -88,10 +88,12 @@ def delete_customer_view(request, pk):
     return HttpResponseRedirect('/admin-view-customer')
 
 
+@login_required(login_url='adminlogin')
 def admin_category_view(request):
     return render(request, 'insurance/admin_category.html')
 
 
+@login_required(login_url='adminlogin')
 def admin_add_category_view(request):
     if request.method == 'POST':
         form = forms.CategoryForm(request.POST)
@@ -103,6 +105,7 @@ def admin_add_category_view(request):
     return render(request, 'insurance/admin_add_category.html', {'form': form})
 
 
+@login_required(login_url='adminlogin')
 def admin_view_category_view(request):
     categories = models.Category.objects.all()
     return render(request, 'insurance/admin_view_category.html', {'categories': categories})
@@ -112,7 +115,7 @@ def admin_view_category_view(request):
 #     categories = models.Category.objects.all()
 #     return render(request, 'insurance/admin_delete_category.html', {'categories': categories})
 
-
+@login_required(login_url='adminlogin')
 def delete_category_view(request, pk):
     category = models.Category.objects.get(id=pk)
     category.delete()
@@ -138,10 +141,12 @@ def update_category_view(request, pk):
     return render(request, 'insurance/update_category.html', {'form': form})
 
 
+@login_required(login_url='adminlogin')
 def admin_policy_view(request):
     return render(request, 'insurance/admin_policy.html')
 
 
+@login_required(login_url='adminlogin')
 def admin_add_policy_view(request):
     form = forms.PolicyForm()
 
@@ -158,11 +163,13 @@ def admin_add_policy_view(request):
     return render(request, 'insurance/admin_add_policy.html', {'form': form})
 
 
+@login_required(login_url='adminlogin')
 def admin_view_policy_view(request):
     policies = models.Policy.objects.all()
     return render(request, 'insurance/admin_view_policy.html', {'policies': policies})
 
 
+@login_required(login_url='adminlogin')
 def admin_update_policy_view(request):
     policies = models.Policy.objects.all()
     return render(request, 'insurance/admin_update_policy.html', {'policies': policies})
@@ -188,37 +195,44 @@ def update_policy_view(request, pk):
     return render(request, 'insurance/update_policy.html', {'form': form})
 
 
+@login_required(login_url='adminlogin')
 def admin_delete_policy_view(request):
     policies = models.Policy.objects.all()
     return render(request, 'insurance/admin_delete_policy.html', {'policies': policies})
 
 
+@login_required(login_url='adminlogin')
 def delete_policy_view(request, pk):
     policy = models.Policy.objects.get(id=pk)
     policy.delete()
     return redirect('admin-delete-policy')
 
 
+@login_required(login_url='adminlogin')
 def admin_view_policy_holder_view(request):
     policyrecords = models.PolicyRecord.objects.all()
     return render(request, 'insurance/admin_view_policy_holder.html', {'policyrecords': policyrecords})
 
 
+@login_required(login_url='adminlogin')
 def admin_view_approved_policy_holder_view(request):
     policyrecords = models.PolicyRecord.objects.all().filter(status='Approved')
     return render(request, 'insurance/admin_view_approved_policy_holder.html', {'policyrecords': policyrecords})
 
 
+@login_required(login_url='adminlogin')
 def admin_view_disapproved_policy_holder_view(request):
     policyrecords = models.PolicyRecord.objects.all().filter(status='Disapproved')
     return render(request, 'insurance/admin_view_disapproved_policy_holder.html', {'policyrecords': policyrecords})
 
 
+@login_required(login_url='adminlogin')
 def admin_view_waiting_policy_holder_view(request):
     policyrecords = models.PolicyRecord.objects.all().filter(status='Pending')
     return render(request, 'insurance/admin_view_waiting_policy_holder.html', {'policyrecords': policyrecords})
 
 
+@login_required(login_url='adminlogin')
 def approve_request_view(request, pk):
     policyrecords = models.PolicyRecord.objects.get(id=pk)
     policyrecords.status = 'Approved'
@@ -226,6 +240,7 @@ def approve_request_view(request, pk):
     return redirect('admin-view-policy-holder')
 
 
+@login_required(login_url='adminlogin')
 def disapprove_request_view(request, pk):
     policyrecords = models.PolicyRecord.objects.get(id=pk)
     policyrecords.status = 'Disapproved'
@@ -233,11 +248,13 @@ def disapprove_request_view(request, pk):
     return redirect('admin-view-policy-holder')
 
 
+@login_required(login_url='adminlogin')
 def admin_question_view(request):
     questions = models.Question.objects.all()
     return render(request, 'insurance/admin_question.html', {'questions': questions})
 
 
+@login_required(login_url='adminlogin')
 def update_question_view(request, pk):
     question = models.Question.objects.get(id=pk)
     questionForm = forms.QuestionForm(instance=question)
@@ -261,6 +278,7 @@ def aboutus_view(request):
     return render(request, 'insurance/aboutus.html')
 
 
+@login_required(login_url='adminlogin')
 def contactus_view(request):
     sub = forms.ContactusForm()
     if request.method == 'POST':
